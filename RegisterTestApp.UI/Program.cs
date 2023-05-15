@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using RegisterTestApp.Service;
 using RegisterTestApp.Service.Db;
 
@@ -5,7 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped<RegistrationAppContext>();
 builder.Services.AddScoped<IRegistrationService, RegistrationService>();

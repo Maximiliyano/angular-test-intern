@@ -28,4 +28,5 @@ class RegistrationModel {
   lastName: string = '';
   email: string = '';
   phoneNumbers: string[] = [''];
+  dateBirth: Date = new Date();
 }
