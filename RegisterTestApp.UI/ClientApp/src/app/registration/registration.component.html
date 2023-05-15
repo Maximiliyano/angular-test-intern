@@ -23,7 +23,9 @@
       <div class="form-group">
         <label for="name">Date of Birth</label>
         <input type="date" class="form-control" id="dateBirth"
-               [(ngModel)]="model.dateBirth" name="dateBirth">
+               [(ngModel)]="model.dateBirth" name="dateBirth" (change) = "validateDateOfBirth()">
+        <div *ngIf="showAgeError" class="error-message">
+          You should be at least 18 years old to use this app</div>
       </div>
 
       <div class="form-group">
@@ -39,9 +41,8 @@
           <i class="bi bi-plus-circle"></i>
         </button>
       </div>
-
       <div class="form-group mt-3">
-        <button class="btn btn-primary" (click)="this.save()">Save</button>
+        <button class="btn btn-primary" [disabled]="showAgeError" (click)="this.save()">Save</button>
       </div>
     </form>
   </div>

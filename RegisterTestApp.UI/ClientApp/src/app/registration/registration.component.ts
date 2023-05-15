@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './registration.component.html'
 })
 export class Registration {
+  public showAgeError: boolean | undefined;
+
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
   model = new RegistrationModel();
@@ -21,6 +23,15 @@ export class Registration {
     this.model.phoneNumbers.splice(index, 1);
   }
   trackByIndex = (index: number, obj: any): any => index;
+
+  validateDateOfBirth() {
+    const currentDate = new Date();
+    const inputDate = new Date(this.model.dateBirth);
+    const diff = currentDate.getTime() - inputDate.getTime();
+    const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+
+    this.showAgeError = age < 18;
+  }
 }
 
 class RegistrationModel {
