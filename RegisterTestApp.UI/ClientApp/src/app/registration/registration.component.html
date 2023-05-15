@@ -32,7 +32,7 @@
         <label for="name">Phone number</label>
         <div class="input-group mb-1" *ngFor="let phone of model.phoneNumbers; let i = index;trackBy:trackByIndex;">
           <input type="text" class="form-control mr-2"
-                 [(ngModel)]="model.phoneNumbers[i]" name="phoneNumber{{i}}">
+                 [(ngModel)]="model.phoneNumbers[i]" name="phoneNumber{{i}}" mask="(999) 999-9999" placeholder="(123) 456-7890">
           <button type="button" (click)="this.removePhone(i)" class="btn btn-warn">
             <i class="bi bi-x-circle"></i>
           </button>
